@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Skype.ChatService;
 using Skype.Models;
+using System.IO;
 
 namespace Skype
 {
@@ -27,10 +30,18 @@ namespace Skype
             services.AddDbContext<SkypeContext>(options => options.UseSqlServer(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddSignalR();
+
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowAllOrigin", builder => builder.AllowAnyOrigin());
+                options.AddPolicy("AllowAllOrigin", builder => {
+                    builder
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .WithOrigins("http://localhost:4200");
+                });
             });
+
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -38,6 +49,8 @@ namespace Skype
                 configuration.RootPath = "ClientApp/dist";
             });
         }
+
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -52,15 +65,31 @@ namespace Skype
                 app.UseHsts();
             }
 
+            app.UseDefaultFiles();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseCors("CorsPolicy");
+
+            //app.Run(async (context) =>
+            //{
+            //    context.Response.ContentType = "text/html";
+            //    await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
+            //});
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+                routes.MapSpaFallbackRoute(
+                    "angular-fallback",
+                    new { controller = "Home", action = "Index" });
+            });
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chat");
             });
 
             app.UseSpa(spa =>

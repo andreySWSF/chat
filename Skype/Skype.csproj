@@ -28,6 +28,8 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\Components\data.service.ts" />
+    <None Remove="ClientApp\src\app\Components\skype-window.guard.ts" />
+    <None Remove="ClientApp\src\app\Components\skype-window\skype-window.component.ts" />
     <None Remove="ClientApp\src\app\User.ts" />
   </ItemGroup>
 
@@ -36,6 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\Components\skype-window.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Components\skype-window\skype-window.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\data.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\User.ts" />
   </ItemGroup>

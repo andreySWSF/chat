@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h1> Login page </h1>
+</div>
+
+<div class="loginForm">
+  <div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Login')">Login</button>
+    <button class="tablinks" onclick="openCity(event, 'Join')">Join</button>
+    <div id="Login" class="tabcontent">
+
+      <input id="login" type="text" placeholder="login" #loginInput />
+      <input id="password " type="text" placeholder="password" #passwordInput />
+      <div style="display:block">
+        <button (click)="checkUser(loginInput.value, passwordInput.value)">Login</button>
+        <button>Cancel</button>
+      </div>
+
+    </div>
+
+    <div id="Join" class="tabcontent">
+      <input type="text" placeholder="login" #loginInput />
+      <input type="text" placeholder="password" #passwordInput/>
+      <input type="text" placeholder="repeat password" #passwordRepeatInput/>
+      <div style="display:block">
+        <button (click)="registerUser(loginInput.value, passwordInput.value, passwordRepeatInput.value)">Login</button>
+        <button>Cancel</button>
+      </div>
+    </div>
+
+  </div>
+  <div id="validation">{{reportMessage}}</div>
+</div>
+
+<!--<script>
+  function openCity(evt, formName) {
+  
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(formName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>-->
