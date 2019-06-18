@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { DataService } from './data.service';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { User } from './user';
-import signalR = require('@aspnet/signalr');
+//import signalR = require('@aspnet/signalr');
 
 @Component({
   selector: 'app-root',
@@ -29,9 +29,9 @@ export class AppComponent {
   ngOnInit() {
     //this.nick = window.prompt('Your name:', 'John');
 
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/chat')
-      .build();
+    //this.hubConnection = new signalR.HubConnectionBuilder()
+    //  .withUrl('https://localhost:5001/chat')
+    //  .build();
 
     this.hubConnection
       .start()
