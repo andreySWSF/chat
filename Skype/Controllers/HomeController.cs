@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+//using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Skype.Models;
 
 namespace Skype.Controllers
@@ -14,6 +16,11 @@ namespace Skype.Controllers
     [Route("api/[controller]")]
     public class HomeController : Controller
     {
+        //var builder = new ConfigurationBuilder();
+        //// установка пути к текущему каталогу
+        //builder.SetBasePath(Directory.GetCurrentDirectory());
+        //    // получаем конфигурацию из файла appsettings.json
+        //    builder.AddJsonFile("appsettings.json");
 
        // SkypeContext context = new SkypeContext();
 
@@ -23,16 +30,18 @@ namespace Skype.Controllers
 
         private readonly SkypeContext db;
 
-        public HomeController(IHostingEnvironment env, SkypeContext context)
+        //public object Builder { get => builder; set => builder = value; }
+
+        public HomeController(IHostingEnvironment env)
         {
             _env = env;
-            db = context;
+           
         }
 
-        public async Task<IActionResult> Index()
-        {
-            return View(await db.Users.ToListAsync());
-        }
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await db.Users.ToListAsync());
+        //}
 
         public IActionResult Create()
         {
