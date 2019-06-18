@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace Skype.Models
 {
-    public class Chat
+    public class Contact
     {
         public int Id { get; set; }
-        public string ChatName { get; set; }
-        public List<Message> Messages { get; set; }
-      //  public List<User> Users { get; set; }
+        public string NickName { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace Skype.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
         public DbSet<Deliver> Delivers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
