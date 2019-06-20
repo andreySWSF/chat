@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace Skype.Models
 {
-    public class Contact
+    public class Delivery
     {
         public int Id { get; set; }
-        public string NickName { get; set; }
+        public int FromUserId { get; set; }
+        public int ToUserId { get; set; }
+        public bool IsDelivered { get; set; }
     }
 }
