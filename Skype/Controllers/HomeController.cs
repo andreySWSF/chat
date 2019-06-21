@@ -16,10 +16,10 @@ namespace Skype.Controllers
     public class HomeController : Controller
     {
 
-       // SkypeContext context = new SkypeContext();
 
         User ivan = new User { NickName = "Ivan", Password = "sdfg" };
-
+       // var context = new SkypeContext();
+        
         IHostingEnvironment _env;
 
         private readonly SkypeContext db;
@@ -35,10 +35,10 @@ namespace Skype.Controllers
             return View(await db.Users.ToListAsync());
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         public async Task<IActionResult> Create(User user)
@@ -62,34 +62,34 @@ namespace Skype.Controllers
         }
 
 
-        [HttpGet]
-        [ActionName("Delete")]
-        public async Task<IActionResult> ConfirmDelete(int? id)
-        {
-            if (id != null)
-            {
-                User user = await db.Users.FirstOrDefaultAsync(p => p.Id == id);
-                if (user != null)
-                    return View(user);
-            }
-            return NotFound();
-        }
+        //[HttpGet]
+        //[ActionName("Delete")]
+        //public async Task<IActionResult> ConfirmDelete(int? id)
+        //{
+        //    if (id != null)
+        //    {
+        //        User user = await db.Users.FirstOrDefaultAsync(p => p.Id == id);
+        //        if (user != null)
+        //            return View(user);
+        //    }
+        //    return NotFound();
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id != null)
-            {
-                User user = await db.Users.FirstOrDefaultAsync(p => p.Id == id);
-                if (user != null)
-                {
-                    db.Users.Remove(user);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-            }
-            return NotFound();
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id != null)
+        //    {
+        //        User user = await db.Users.FirstOrDefaultAsync(p => p.Id == id);
+        //        if (user != null)
+        //        {
+        //            db.Users.Remove(user);
+        //            await db.SaveChangesAsync();
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+        //    return NotFound();
+        //}
 
         public bool CheckUser(User user)
         {

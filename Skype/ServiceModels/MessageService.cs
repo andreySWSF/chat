@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Skype.ServiceModels
 {
-    public class ChatService
+    public class MessageService
     {
         public SkypeContext _skypeContext;
 
-        public ChatService(SkypeContext skypeContext)
+        public MessageService(SkypeContext skypeContext)
         {
             _skypeContext = skypeContext;
         }
