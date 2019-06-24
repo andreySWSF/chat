@@ -8,6 +8,10 @@ namespace Skype.Models
 {
     public class SkypeContext : DbContext
     {
+        public SkypeContext()
+        {
+        }
+
         public SkypeContext(DbContextOptions<SkypeContext> options)
           : base(options)
         { _ = Database.EnsureCreated(); }
