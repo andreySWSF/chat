@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Skype.Models;
 using Skype.Models.VModels;
 using System;
@@ -10,8 +11,10 @@ namespace Skype.ServiceModels
 {
     public class MessageService : GenericService<Message>
     {
-        public MessageService(SkypeContext skypeContext, DbSet<Message> set) : base(skypeContext, set)
+        private readonly IMapper _mapper;
+        public MessageService(SkypeContext skypeContext, DbSet<Message> set, IMapper mapper) : base(skypeContext, set)
         {
+            _mapper = mapper;
         }
     }
 }

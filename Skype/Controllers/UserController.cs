@@ -12,6 +12,7 @@ namespace Skype.Controllers
     [ApiController]
     public class UserController : Controller
     {
+
         private readonly SkypeContext db;
      //   ChatService chatService;
 
