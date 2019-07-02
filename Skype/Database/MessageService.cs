@@ -9,16 +9,10 @@ using System.Threading.Tasks;
 
 namespace Skype.ServiceModels
 {
-    public class UserService : GenericService<User>
+    public class MessageRepository : GenericRepository
     {
-        public SkypeContext _skypeContext;
         private readonly IMapper _mapper;
-
-        //public UserService(SkypeContext skypeContext)
-        //{
-        //    _skypeContext = skypeContext;
-        //}
-        public UserService(SkypeContext skypeContext, DbSet<User> set, IMapper mapper) : base(skypeContext, set)
+        public MessageRepository(SkypeContext skypeContext, IMapper mapper) : base(skypeContext)
         {
             _mapper = mapper;
         }

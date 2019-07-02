@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { DataService } from '../../data.service';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
-import signalR = require('@aspnet/signalr');
+//import signalR = require('@aspnet/signalr');
+import * as signalR from '@aspnet/signalr';
 import { User } from '../../User';
 
 
@@ -11,6 +12,7 @@ import { User } from '../../User';
   styleUrls: ['./skype-window.component.css'],
   providers: [DataService]
 })
+
 export class SkypeWindowComponent {
 
   hello: string = "";
@@ -27,8 +29,7 @@ export class SkypeWindowComponent {
 
   constructor(private dataService: DataService) { }
 
-  ngOnInit() {   
-
+  ngOnInit() {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('https://localhost:5001/chat')
       .build();

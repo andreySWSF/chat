@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data.service';
 import { User } from '../../User';
+import { Routes } from '@angular/router';
 
 //class User
 //{ 
@@ -20,12 +21,19 @@ import { User } from '../../User';
   styleUrls: ['./login.component.css'],
    providers: [DataService]
 })
+
+//const routes: Routes = [
+//  { path: '', redirectTo: '/AppComponent', pathMatch: 'full' },
+//  { path: 'skype', component: skype-window },
+
+//];
+
 export class LoginComponent { 
   
-  //user: User = new User(); // данные вводимого пользователя
+  
   isValid: boolean = false;
   reportMessage: string = "";
-  receivedUser: User; // полученный пользователь
+  receivedUser: User; 
   done: boolean = false;
   constructor(private dataService: DataService) { }
   //submit(user: User) {
@@ -39,12 +47,13 @@ export class LoginComponent {
     
     var nick = name;
     var password = pass;
-    var user: User = new User(nick,password);   
-
-    this.dataService.postData(user).subscribe((data: boolean) => {
+    var user: User = new User(nick, password);
+   
+    this.dataService.postUserData(user).subscribe((data: boolean) => {
       this.isValid = data;
       if (this.isValid) {
         this.reportMessage = "User is valid";
+        
       }
       else { this.reportMessage = "User not found, register please"; }
     });   
@@ -56,19 +65,24 @@ export class LoginComponent {
     var nick = name;
     var password = pass;
     var repeatPassword = repeatPass;
+    
     if (password != repeatPassword) {
+      this.reportMessage = "Your password incorrect";
       return;
     }
+    else {
+      var userOnRegistration: User = new User(nick, password);
 
-    var user: User = new User(nick, password);
+      this.dataService.postUserData(userOnRegistration).subscribe((data: boolean) => {
+        this.isValid = data;
+        if (this.isValid) {
+          this.reportMessage = "User allready exist";
+        }
+        else { this.reportMessage = "User not found, register please"; }
+      });
+    }
 
-    this.dataService.postData(user).subscribe((data: boolean) => {
-      this.isValid = data;
-      if (this.isValid) {
-        this.reportMessage = "User allready exist";
-      }
-      else { this.reportMessage = "User not found, register please"; }
-    });
+    
 
   }
 

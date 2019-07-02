@@ -14,14 +14,15 @@ export class DataService {
   getUser() {
     return this.http.get(this.url);
   }
-  postData(user: User) {
+  postUserData(user: User) {
 
     const body = { nickName: user.nickName, password: user.password };
-    return this.http.post('https://localhost:5001/api/Home/', body);
+    return this.http.post('https://localhost:5001/api/User/PostUserResult', body);
   }
-  createUser(user: User) {
-    return this.http.post(this.url, user);
-  }
+  
+  //createUser(user: User) {
+  //  return this.http.post(this.url, user);
+  //}
   //updateProduct(user: User) {
 
   //  return this.http.put(this.url + '/' + user.id, user);

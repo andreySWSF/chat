@@ -1,5 +1,5 @@
 .loginForm {
-  margin: 20% 25% 25% 25%;
+  margin: 10% 10% 10% 40%;
   width: 20%;
   height: 30%;
 }
@@ -41,7 +41,6 @@
 
 .tabcontent {
   display: block;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
+  padding: 6px 12px;  
   border-top: none;
 }

@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\Components\login\" />
+    <Folder Include="ServiceModels\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Skype.Models;
+using Skype.ServiceModels;
 
 namespace Skype.Controllers
 {
@@ -16,18 +17,19 @@ namespace Skype.Controllers
     public class HomeController : Controller
     {
 
-
-        User ivan = new User { NickName = "Ivan", Password = "sdfg" };
-       // var context = new SkypeContext();
         
+        
+        // var context = new SkypeContext();
+
         IHostingEnvironment _env;
 
         private readonly SkypeContext db;
+       
+        
 
-        public HomeController(IHostingEnvironment env, SkypeContext context)
+        public HomeController(IHostingEnvironment env)
         {
-            _env = env;
-            db = context;
+            _env = env;           
         }
 
         public async Task<IActionResult> Index()
@@ -40,22 +42,23 @@ namespace Skype.Controllers
         //    return View();
         //}
 
-        [HttpPost]
-        public async Task<IActionResult> Create(User user)
-        {
-            db.Users.Add(user);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Create(User user)
+        //{
+        //    db.Users.Add(user);
+        //    await db.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
 
         [EnableCors("AllowAllOrigin")]
         [HttpPost]
-        public IActionResult PostUser([FromBody]User user)
+        [Route("PostUserResult")]
+        public IActionResult PostUserResult([FromBody]User user)
         {
            
            // return new PhysicalFileResult(Path.Combine(env.WebRootPath, "index.html"), "text/html");
 
-            var checkResult = CheckUser(user);
+            //var checkResult = CheckUser(user);
 
             return Json(true);           
 
@@ -91,15 +94,7 @@ namespace Skype.Controllers
         //    return NotFound();
         //}
 
-        public bool CheckUser(User user)
-        {
-            
-           if (user.Equals(ivan))
-            {
-                return true;
-            }
-            else return false;
-        }
+       
     }
     
     

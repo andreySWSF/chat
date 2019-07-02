@@ -3,31 +3,61 @@
 </div>
 
 <div class="loginForm">
-  <div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'Login')">Login</button>
-    <button class="tablinks" onclick="openCity(event, 'Join')">Join</button>
-    <div id="Login" class="tabcontent">
+  <div class="container">
+    
+    <div id="exTab3" class="container">
+      <ul class="nav nav-pills">
+        <li class="active">
+          <a href="#1b" data-toggle="tab">Login</a>
+        </li>
+        <li>
+          <a href="#2b" data-toggle="tab">Join</a>
+        </li>
+      </ul>
 
-      <input id="login" type="text" placeholder="login" #loginInput />
+      <div class="tab-content clearfix" style="background-color:white">
+        <div class="tab-pane active" id="1b">
+          <input id="login" type="text" placeholder="login" #loginInput />
+          <input id="password " type="text" placeholder="password" #passwordInput />
+          <div style="display:block">
+            <button (click)="checkUser(loginInput.value, passwordInput.value)">Login</button>
+            <button>Cancel</button>
+          </div>
+         </div>
+          <div class="tab-pane" id="2b">
+            <input type="text" placeholder="login" #loginRegister />
+            <input type="text" placeholder="password" #passwordRegister />
+            <input type="text" placeholder="repeat password" #passwordRepeatRegister />
+            <div style="display:block">
+              <button (click)="registerUser(loginRegister.value, passwordRegister.value, passwordRepeatRegister.value)">Register</button>
+              <button>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+  </div>
+    
+
+      <!--<input id="login" type="text" placeholder="login" #loginInput />
       <input id="password " type="text" placeholder="password" #passwordInput />
       <div style="display:block">
         <button (click)="checkUser(loginInput.value, passwordInput.value)">Login</button>
         <button>Cancel</button>
       </div>
 
-    </div>
+  
 
-    <div id="Join" class="tabcontent">
       <input type="text" placeholder="login" #loginInput />
       <input type="text" placeholder="password" #passwordInput/>
       <input type="text" placeholder="repeat password" #passwordRepeatInput/>
       <div style="display:block">
         <button (click)="registerUser(loginInput.value, passwordInput.value, passwordRepeatInput.value)">Login</button>
         <button>Cancel</button>
-      </div>
-    </div>
+      </div>-->
+  
 
-  </div>
+  
   <div id="validation">{{reportMessage}}</div>
 </div>
 

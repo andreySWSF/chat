@@ -83,7 +83,7 @@ namespace Skype
             }
 
             app.UseDefaultFiles();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseCors("CorsPolicy");
