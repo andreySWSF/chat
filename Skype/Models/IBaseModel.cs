@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Skype.Models.DBModels
+namespace Skype.Models
 {
-    public class BaseModel : IBaseModel
+    interface IBaseModel
     {
-        public string Id { get; set; }
+        string Id { get; set; }
     }
 }

@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace Skype.Services.Contracts
 {
-    public interface IUserService
+    interface IMessageService
     {
-        bool HasChats(int userId);
-      //  bool HasContacts(int userId);
     }
 }

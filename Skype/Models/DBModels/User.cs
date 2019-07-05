@@ -7,24 +7,21 @@ using System.Threading.Tasks;
 
 namespace Skype.Models
 {
-    public class User : BaseModel
+    public class User : Microsoft.AspNetCore.Identity.IdentityUser, IBaseModel
     {
+        //public override int Id { get; set; }
         public string NickName { get; set; }
         public List<Message> Messages { get; set; }
         public List<Chat> Chats { get; set; }
         public List<UserConnection> FromUserToUser { get; set; }
         // public int ChatId { get; set; }
-        public string Password { get; set; }
-        //public List<Message> Messages { get; set; }    
-        //public virtual  List<Chat> Chats { get; set; }
-
+        public string Password { get; set; }     
         public List<UserChat> UserChats { get; set; }
-
+        
 
         public User()
         {
             UserChats = new List<UserChat>();
-
         }
     }
 }

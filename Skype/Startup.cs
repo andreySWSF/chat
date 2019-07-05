@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -43,6 +44,14 @@ namespace Skype
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<SkypeContext>(options => options.UseSqlServer(connection));
+
+            // auth by cookie
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Login");
+                });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSignalR();
@@ -88,11 +97,9 @@ namespace Skype
             app.UseSpaStaticFiles();
             app.UseCors("CorsPolicy");
 
-            //app.Run(async (context) =>
-            //{
-            //    context.Response.ContentType = "text/html";
-            //    await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
-            //});
+            app.UseAuthentication();
+
+           
 
             app.UseMvc(routes =>
             {

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Skype.Models.DBModels
+namespace Skype.Database.Contracts
 {
-    public class BaseModel : IBaseModel
+    interface IMesssageRepository: IRepository
     {
-        public string Id { get; set; }
     }
 }

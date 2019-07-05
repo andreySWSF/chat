@@ -9,8 +9,8 @@ namespace Skype.Database
     public interface IRepository : IDisposable
         //where T : class
     {
-        IEnumerable<T> GetAll<T>() where T: BaseModel;
-        T Get<T>(int id) where T : BaseModel;
+        IEnumerable<T> GetAll<T>() where T: IBaseModel;
+        T Get<T>(int id) where T : IBaseModel;
         void Create<T>(T item);
         void Update<T>(T item);
         void Delete<T>(int id);

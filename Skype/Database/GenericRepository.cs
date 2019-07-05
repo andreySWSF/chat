@@ -37,13 +37,13 @@ namespace Skype.Models.VModels
             GC.SuppressFinalize(this);
         }
 
-        public IEnumerable<T> GetAll<T>() where T : BaseModel
+        public IEnumerable<T> GetAll<T>() where T : DBModels.IBaseModel
         {
             var table = this._context.Set<T>();
             return table;
         }
 
-        public T Get<T>(int id) where T : BaseModel
+        public T Get<T>(int id) where T : DBModels.IBaseModel
         {
             var table = this._context.Set<T>();
             return table.SingleOrDefault(el=>el.Id == id);
