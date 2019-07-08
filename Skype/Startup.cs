@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,8 @@ namespace Skype
             services.AddSingleton(mapper);
             //services.AddMvc();
 
+            services.AddDefaultIdentity<IdentityRole>()
+                .AddEntityFrameworkStores<SkypeContext>();
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<SkypeContext>(options => options.UseSqlServer(connection));

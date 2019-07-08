@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Skype.Database.Contracts
+namespace Skype.Models.VModels
 {
-    public interface IChatRepository<T> : IRepository<T> where T : class
+    public class BaseVM
     {
+        public string Id { get; set; }
     }
 }

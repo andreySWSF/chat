@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Skype.Database;
-using Skype.Models.DBModels;
+using Skype.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 
 namespace Skype.Models.VModels
 {
-    public class GenericRepository : IRepository
+    public class GenericRepository<T> : IRepository<T> where T: class, IBaseModel
     {
         SkypeContext _context;
+        DbSet<T> table;
+       // EnvironmentVariableTarget v;
 
         public GenericRepository(SkypeContext context)
         {
             this._context = context;
+            table = this._context.Set<T>();
         }
        
         private bool disposed = false;
@@ -37,36 +40,40 @@ namespace Skype.Models.VModels
             GC.SuppressFinalize(this);
         }
 
-        public IEnumerable<T> GetAll<T>() where T : DBModels.IBaseModel
-        {
-            var table = this._context.Set<T>();
+        public IEnumerable<T> GetAll()
+        {            
             return table;
         }
 
-        public T Get<T>(int id) where T : DBModels.IBaseModel
-        {
-            var table = this._context.Set<T>();
+        public T Get(string id) //where T : class, IBaseModel
+        {            
+           // return table.SingleOrDefault(el=>el.Id == id);
             return table.SingleOrDefault(el=>el.Id == id);
         }
 
-        public void Create<T>(T item)
+        public void Create(T item)
         {
-            throw new NotImplementedException();
+            table.Add(item);
+            Save();
+
+
+
         }
 
-        public void Update<T>(T item)
+        public void Update(T item)// where T : class, IBaseModel
         {
-            throw new NotImplementedException();
+            //table.Where<T>(t=>t.Id==item.id);
+            //Save();
         }
 
-        public void Delete<T>(int id)
+        public void Delete(string id)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+           _context.SaveChanges();
         }
     }
 }

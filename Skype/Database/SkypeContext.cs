@@ -25,6 +25,7 @@ namespace Skype.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             //modelBuilder.Entity<UserMessage>()
             //    .HasKey(t => new { t.UserId, t.MessageId });
             //modelBuilder.Entity<UserMessage>()

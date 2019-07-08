@@ -9,8 +9,8 @@ namespace Skype.Models
     public class UserConnection
     {
         [ForeignKey("User.Id")]
-        public int UserFromId { get; set; }
+        public string UserFromId { get; set; }
         [ForeignKey("User.Id")]
-        public int UserToId { get; set; }
+        public string UserToId { get; set; }
     }
 }

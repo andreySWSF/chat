@@ -1,4 +1,5 @@
-﻿using Skype.Models.DBModels;
+﻿using Skype.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Skype.Database
 {
-    public interface IRepository : IDisposable
-        //where T : class
+    public interface IRepository<T> : IDisposable
+        where T : class
     {
-        IEnumerable<T> GetAll<T>() where T: IBaseModel;
-        T Get<T>(int id) where T : IBaseModel;
-        void Create<T>(T item);
-        void Update<T>(T item);
-        void Delete<T>(int id);
+        IEnumerable<T> GetAll();
+        T Get(string id);
+        void Create(T item);
+        void Update(T item);
+        void Delete(string id);
         void Save();
 
     }

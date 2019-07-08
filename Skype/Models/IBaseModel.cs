@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Skype.Models
 {
-    interface IBaseModel
+    public interface IBaseModel
     {
         string Id { get; set; }
     }

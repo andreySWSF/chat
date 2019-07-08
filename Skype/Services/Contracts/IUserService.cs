@@ -7,7 +7,7 @@ namespace Skype.Services.Contracts
 {
     public interface IUserService
     {
-        bool HasChats(int userId);
+        bool HasChats(string userId);
       //  bool HasContacts(int userId);
     }
 }

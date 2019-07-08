@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Skype.Database
 {
-    public interface IUserRepository : IRepository
+    public interface IUserRepository<T> : IRepository<T> where T: class
     {
     }
 }

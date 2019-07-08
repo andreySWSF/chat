@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Skype.Database.Contracts
 {
-    interface IMesssageRepository: IRepository
+    interface IMesssageRepository<T>: IRepository<T> where T: class
     {
     }
 }

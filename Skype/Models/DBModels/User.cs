@@ -1,4 +1,4 @@
-﻿using Skype.Models.DBModels;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +9,8 @@ namespace Skype.Models
 {
     public class User : Microsoft.AspNetCore.Identity.IdentityUser, IBaseModel
     {
-        //public override int Id { get; set; }
+
+        public override string Id { get; set; }
         public string NickName { get; set; }
         public List<Message> Messages { get; set; }
         public List<Chat> Chats { get; set; }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Skype.Models.VModels
 {
-    public class ChatVM
+    public class ChatVM : BaseVM
     {
-        public int Id { get; set; }
+       
         public string ChatName { get; set; }
     }
 }

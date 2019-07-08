@@ -8,11 +8,11 @@ namespace Skype.ServiceModels
 {
     public class DeliveryService
     {
-        public SkypeContext _skypeContext;
+        //public SkypeContext _skypeContext;
 
-        public DeliveryService(SkypeContext skypeContext)
-        {
-            _skypeContext = skypeContext;
-        }
+        //public DeliveryService(SkypeContext skypeContext)
+        //{
+        //    _skypeContext = skypeContext;
+        //}
     }
 }

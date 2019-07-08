@@ -1,4 +1,5 @@
-﻿using Skype.Models.DBModels;
+﻿
+using Skype.Models.DBModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Skype.Models
 {
-    public class Message : DBModels.IBaseModel
+    public class Message : BaseModel, IBaseModel
     {
-       
+        
         public string Text { get; set; }
       //  public int UserId { get; set; }       
         public int UserDeliverId { get; set; }       
