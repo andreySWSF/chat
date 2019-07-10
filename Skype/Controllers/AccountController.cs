@@ -35,7 +35,7 @@ namespace Skype.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVM model)
         {
-           //if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             //{
             //    User user = await db.Users.FirstOrDefaultAsync(u => u.NickName == model.NickName && u.Password == model.Password);
             //    if (user != null)
@@ -57,25 +57,28 @@ namespace Skype.Controllers
         //Watch on GenericRepository
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterVM model)
+        public void Register([FromBody] UserVM model)
         {
+            //можем использовать класс 
+            (_userService as Services.UserService).RegisterUser(model);
             //if (ModelState.IsValid)
-            //{
+            //
             //    User user = await db.Users.FirstOrDefaultAsync(u => u.NickName == model.NickName);
             //    if (user == null)
             //    {
             //        // добавляем пользователя в бд
-            //        db.Users.Add(new User { NickName = model.NickName, Password = model.Password });
-            //        await db.SaveChangesAsync();
+                    
+            //        //db.Users.Add(new User { NickName = model.NickName, Password = model.Password });
+            //        //await db.SaveChangesAsync();
 
-            //        await Authenticate(model.NickName); // аутентификация
+            //        //await Authenticate(model.NickName); // аутентификация
 
-            //        return RedirectToAction("Index", "Home");
+            //        //return RedirectToAction("Index", "Home");
             //    }
             //    else
             //        ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             //}
-            return View(model);
+           // return View(model);
         }
 
         private async Task Authenticate(string userName)
