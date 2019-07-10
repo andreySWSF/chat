@@ -12,6 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Skype.ChatService;
 using Skype.Models;
+using Skype.Services;
+using Skype.Services.Contracts;
 using System.IO;
 
 namespace Skype
@@ -42,11 +44,14 @@ namespace Skype
             services.AddSingleton(mapper);
             //services.AddMvc();
 
-            services.AddDefaultIdentity<IdentityRole>()
-                .AddEntityFrameworkStores<SkypeContext>();
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<SkypeContext>()
+                .AddDefaultTokenProviders();
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<SkypeContext>(options => options.UseSqlServer(connection));
+
+            services.AddTransient<IUserService, UserService>();
 
             // auth by cookie
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

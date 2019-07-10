@@ -9,16 +9,26 @@ using System.Threading.Tasks;
 
 namespace Skype.ServiceModels
 {
-    public class UserRepository : GenericRepository
+    public class UserRepository : GenericRepository<User>, Database.IUserRepository
     {
-        // public SkypeContext _skypeContext;
+         SkypeContext _skypeContext;
         //  private readonly IMapper _mapper;
         //  SkypeContext db;
+        DbSet<User> _table;
 
         public UserRepository(SkypeContext context) : base(context)
         {
+            //_skypeContext = context;
+            _table = context.Set<User>();
             //  _mapper = mapper;
             //this.GetAll<Chat>();
         }
+
+        public User GetByName(string name)
+        {
+            return _table.SingleOrDefault(el => el.NickName == name);
+        }
+
+       
     }
 }

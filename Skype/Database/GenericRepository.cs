@@ -45,9 +45,8 @@ namespace Skype.Models.VModels
             return table;
         }
 
-        public T Get(string id) //where T : class, IBaseModel
-        {            
-           // return table.SingleOrDefault(el=>el.Id == id);
+        public T Get(string id) 
+        {                       
             return table.SingleOrDefault(el=>el.Id == id);
         }
 
@@ -55,8 +54,6 @@ namespace Skype.Models.VModels
         {
             table.Add(item);
             Save();
-
-
 
         }
 
@@ -68,7 +65,9 @@ namespace Skype.Models.VModels
 
         public void Delete(string id)
         {
-            
+            var item = table.SingleOrDefault(el => el.Id == id);
+            item = null;
+            Save();
         }
 
         public void Save()

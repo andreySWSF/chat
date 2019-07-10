@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Skype.ServiceModels
 {
-    public class MessageRepository : GenericRepository
+    public class MessageService 
     {
-        private readonly IMapper _mapper;
-        public MessageRepository(SkypeContext skypeContext, IMapper mapper) : base(skypeContext)
-        {
-            _mapper = mapper;
-        }
+        //private readonly IMapper _mapper;
+        //public MessageService(SkypeContext skypeContext, IMapper mapper) : base(skypeContext)
+        //{
+        //    _mapper = mapper;
+        //}
     }
 }
