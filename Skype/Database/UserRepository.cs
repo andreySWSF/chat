@@ -15,7 +15,7 @@ namespace Skype.ServiceModels
         //  private readonly IMapper _mapper;
         //  SkypeContext db;
         DbSet<User> _table;
-
+        
         public UserRepository(SkypeContext context) : base(context)
         {
             //_skypeContext = context;
@@ -23,10 +23,12 @@ namespace Skype.ServiceModels
             //  _mapper = mapper;
             //this.GetAll<Chat>();
         }
-
+      //  public 
         public User GetByName(string name)
         {
-            return _table.SingleOrDefault(el => el.NickName == name);
+            var user = _table.SingleOrDefault(el => el.NickName == name);
+            if (user == null) throw new Exception();
+            else return user;            
         }
 
        
