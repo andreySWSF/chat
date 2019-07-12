@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Skype.Models;
 using Skype.Models.VModels;
+using Skype.Services;
 using Skype.Services.Contracts;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace Skype.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        IUserService _userService;
+        UserService _userService;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IUserService userService)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, UserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -60,7 +61,7 @@ namespace Skype.Controllers
         public void Register([FromBody] UserVM model)
         {
             //можем использовать класс 
-            (_userService as Services.UserService).RegisterUser(model);
+            _userService.RegisterUser(model);
             //if (ModelState.IsValid)
             //
             //    User user = await db.Users.FirstOrDefaultAsync(u => u.NickName == model.NickName);
