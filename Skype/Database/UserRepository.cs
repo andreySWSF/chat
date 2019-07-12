@@ -23,10 +23,15 @@ namespace Skype.ServiceModels
             //  _mapper = mapper;
             //this.GetAll<Chat>();
         }
-      //  public 
+        public bool IsUserExist(string name)
+        {
+            var user = GetByName(name);
+            return (user != null) ? true : false;
+        }
+
         public User GetByName(string name)
         {
-            var user = _table.SingleOrDefault(el => el.NickName == name);
+            User user = _table.SingleOrDefault(el => el.NickName == name);
             if (user == null) throw new Exception();
             else return user;            
         }

@@ -10,14 +10,13 @@ export class DataService {
   constructor(private http: HttpClient) {
 
   }
- 
   getUser() {
     return this.http.get(this.url);
   }
   postUserData(user: User) {
 
     const body = { nickName: user.nickName, password: user.password };
-    return this.http.post('https://localhost:5001/api/User/PostUserResult', body);
+    return this.http.post('https://localhost:5001/api/Account/Login', body);
   }
   
   //createUser(user: User) {

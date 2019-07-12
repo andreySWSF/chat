@@ -50,19 +50,19 @@ namespace Skype.Controllers
         //    return RedirectToAction("Index");
         //}
 
-        [EnableCors("AllowAllOrigin")]
-        [HttpPost]
-        [Route("PostUserResult")]
-        public IActionResult PostUserResult([FromBody]User user)
-        {
+        //[EnableCors("AllowAllOrigin")]
+        //[HttpPost]
+        //[Route("PostUserResult")]
+        //public IActionResult PostUserResult([FromBody]User user)
+        //{
            
-           // return new PhysicalFileResult(Path.Combine(env.WebRootPath, "index.html"), "text/html");
+        //   // return new PhysicalFileResult(Path.Combine(env.WebRootPath, "index.html"), "text/html");
 
-            //var checkResult = CheckUser(user);
+        //    //var checkResult = CheckUser(user);
 
-            return Json(true);           
+        //    return Json(true);           
 
-        }
+        //}
 
 
         //[HttpGet]

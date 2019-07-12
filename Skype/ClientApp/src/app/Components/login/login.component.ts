@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data.service';
 import { User } from '../../User';
-import { Routes } from '@angular/router';
+import { Routes, Router } from '@angular/router';
+import { SkypeWindowComponent } from '../skype-window/skype-window.component';
 
 //class User
 //{ 
@@ -35,14 +36,18 @@ export class LoginComponent {
   reportMessage: string = "";
   receivedUser: User; 
   done: boolean = false;
-  constructor(private dataService: DataService) { }
-  //submit(user: User) {
-  //  this.dataService.postData(user)
-  //    .subscribe(
-  //      (data: User) => { this.receivedUser = data; this.done = true; },
-  //      error => console.log(error)
-  //    );
-  //}
+  
+  constructor(private dataService: DataService, private router: Router) {
+  }
+  
+  skype: SkypeWindowComponent = new SkypeWindowComponent(this.dataService);
+
+  goToItem(skype: SkypeWindowComponent) {
+
+    this.router.navigate(
+      ['/skype-window', skype]
+    );
+  }
   checkUser(name: string, pass: string) {
     
     var nick = name;
@@ -53,7 +58,7 @@ export class LoginComponent {
       this.isValid = data;
       if (this.isValid) {
         this.reportMessage = "User is valid";
-        
+        this.goToItem(this.skype);
       }
       else { this.reportMessage = "User not found, register please"; }
     });   

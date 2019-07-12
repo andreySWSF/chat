@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,27 +17,34 @@ using System.Threading.Tasks;
 
 namespace Skype.Controllers
 {
+   // [AllowAnonymous]
+    [Route("api/[controller]")]
+    [ApiController]
     public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         UserService _userService;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, UserService userService)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, UserService userService)//
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _userService = userService;
         }
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
+        [EnableCors("AllowAllOrigin")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginVM model)
+        [Route("Login")]
+        //[ValidateAntiForgeryToken]
+        public IActionResult Login([FromBody]UserVM model)
         {
+            var isValid = _userService.IsUserExist(model);
+
             //if (ModelState.IsValid)
             //{
             //    User user = await db.Users.FirstOrDefaultAsync(u => u.NickName == model.NickName && u.Password == model.Password);
@@ -47,13 +56,13 @@ namespace Skype.Controllers
             //    }
             //    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             //}
-            return View(model);
+            return Json(isValid);
         }
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult Register()
+        //{
+        //    return View();
+        //}
 
         //Watch on GenericRepository
         [HttpPost]
@@ -81,6 +90,23 @@ namespace Skype.Controllers
             //}
            // return View(model);
         }
+
+
+        //[EnableCors("AllowAllOrigin")]
+        //[HttpPost]
+        //[Route("PostUserResult")]
+        //public IActionResult UserValidation([FromBody]User user)
+        //{
+        //   //
+        //    // return new PhysicalFileResult(Path.Combine(env.WebRootPath, "index.html"), "text/html");
+
+        //    //var checkResult = CheckUser(user);
+
+        //    return Json(true);
+
+        //}
+
+       
 
         private async Task Authenticate(string userName)
         {

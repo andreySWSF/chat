@@ -44,11 +44,10 @@ import { SkypeWindowGuard } from './Components/skype-window.guard';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: LoginComponent},
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'skype-window', component: SkypeWindowComponent, canActivate: [SkypeWindowGuard] },
-      { path: 'login', component: LoginComponent }
+      { path: 'skype-window', component: SkypeWindowComponent, canActivate: [SkypeWindowGuard] }
     ])
   ],
   providers: [SkypeWindowGuard],

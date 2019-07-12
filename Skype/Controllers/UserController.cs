@@ -29,7 +29,7 @@ namespace Skype.Controllers
         [EnableCors("AllowAllOrigin")]
         [HttpPost]
         [Route("PostUserResult")]
-        public IActionResult PostUserResult([FromBody]User user)
+        public IActionResult UserValidation([FromBody]User user)
         {
 
             // return new PhysicalFileResult(Path.Combine(env.WebRootPath, "index.html"), "text/html");
@@ -43,11 +43,7 @@ namespace Skype.Controllers
         public bool CheckUser(User user)
         {
             return user.Equals(ivan);
-            //if (user.Equals(ivan))
-            //{
-            //    return true;
-            //}
-            //else return false;
+           
         }
 
     }

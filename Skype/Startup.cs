@@ -14,7 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Skype.Authorization;
 using Skype.ChatService;
+using Skype.Database;
 using Skype.Models;
+using Skype.ServiceModels;
 using Skype.Services;
 using Skype.Services.Contracts;
 using System.IO;
@@ -54,13 +56,15 @@ namespace Skype
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<SkypeContext>(options => options.UseSqlServer(connection));
 
-            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<UserService>();
+            
 
             // auth by cookie
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Login");
+                    options.LoginPath = new PathString("/Login");
                 });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -134,7 +138,7 @@ namespace Skype
                     template: "{controller}/{action=Index}/{id?}");
                 routes.MapSpaFallbackRoute(
                     "angular-fallback",
-                    new { controller = "Home", action = "Index" });
+                    new { controller = "Account", action = "Login" });
             });
 
             app.UseSignalR(routes =>

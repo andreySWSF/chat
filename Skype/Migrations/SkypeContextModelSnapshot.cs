@@ -142,7 +142,7 @@ namespace Skype.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chat");
                 });
 
             modelBuilder.Entity("Skype.Models.Delivery", b =>
@@ -158,7 +158,7 @@ namespace Skype.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Deliverys");
+                    b.ToTable("Deliveries");
                 });
 
             modelBuilder.Entity("Skype.Models.Message", b =>
@@ -182,7 +182,7 @@ namespace Skype.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("Skype.Models.User", b =>
@@ -250,7 +250,7 @@ namespace Skype.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("UserChat");
+                    b.ToTable("UserChats");
                 });
 
             modelBuilder.Entity("Skype.Models.UserConnection", b =>
@@ -265,7 +265,7 @@ namespace Skype.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserConnection");
+                    b.ToTable("UserConnections");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
