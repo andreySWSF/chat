@@ -32,8 +32,7 @@ namespace Skype.ServiceModels
         public User GetByName(string name)
         {
             User user = _table.SingleOrDefault(el => el.NickName == name);
-            if (user == null) throw new Exception();
-            else return user;            
+             return user;             
         }
 
        

@@ -43,7 +43,8 @@ namespace Skype.Services
         public void RegisterUser(UserVM user)
         {
             var userToAdd = MapModels(user);
-            _repository.Create(userToAdd);            
+            _repository.Create(userToAdd);
+            _repository.Save();
         }
 
         public bool HasChats(string userId)

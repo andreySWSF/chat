@@ -10,7 +10,7 @@ using Skype.Models;
 namespace Skype.Migrations
 {
     [DbContext(typeof(SkypeContext))]
-    [Migration("20190712144927_InitialMigrations")]
+    [Migration("20190713084623_InitialMigrations")]
     partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

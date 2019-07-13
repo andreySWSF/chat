@@ -45,16 +45,16 @@ export class LoginComponent {
   goToItem(skype: SkypeWindowComponent) {
 
     this.router.navigate(
-      ['/skype-window', skype]
+      ['/skype-window']
     );
   }
-  checkUser(name: string, pass: string) {
+  loginUser(name: string, pass: string) {
     
     var nick = name;
     var password = pass;
     var user: User = new User(nick, password);
    
-    this.dataService.postUserData(user).subscribe((data: boolean) => {
+    this.dataService.postUserLogin(user).subscribe((data: boolean) => {
       this.isValid = data;
       if (this.isValid) {
         this.reportMessage = "User is valid";
@@ -78,12 +78,12 @@ export class LoginComponent {
     else {
       var userOnRegistration: User = new User(nick, password);
 
-      this.dataService.postUserData(userOnRegistration).subscribe((data: boolean) => {
+      this.dataService.postUserJoin(userOnRegistration).subscribe((data: boolean) => {
         this.isValid = data;
         if (this.isValid) {
           this.reportMessage = "User allready exist";
         }
-        else { this.reportMessage = "User not found, register please"; }
+        else { this.reportMessage = "You have been registered successfully"; }
       });
     }
 

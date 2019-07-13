@@ -13,12 +13,16 @@ export class DataService {
   getUser() {
     return this.http.get(this.url);
   }
-  postUserData(user: User) {
+  postUserLogin(user: User) {
 
     const body = { nickName: user.nickName, password: user.password };
     return this.http.post('https://localhost:5001/api/Account/Login', body);
   }
-  
+  postUserJoin(user: User) {
+
+    const body = { nickName: user.nickName, password: user.password };
+    return this.http.post('https://localhost:5001/api/Account/Register', body);
+  }
   //createUser(user: User) {
   //  return this.http.post(this.url, user);
   //}

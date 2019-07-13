@@ -66,18 +66,25 @@ namespace Skype.Controllers
 
         //Watch on GenericRepository
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public void Register([FromBody] UserVM model)
+        [EnableCors("AllowAllOrigin")]
+        [Route("Register")]
+        public IActionResult Register([FromBody] UserVM model)
         {
-            //можем использовать класс 
-            _userService.RegisterUser(model);
+            var isValid = _userService.IsUserExist(model);
+            if(isValid == false)
+            {
+                _userService.RegisterUser(model);
+                return Json(false);
+            }         
+
+            else return Json(isValid);
             //if (ModelState.IsValid)
             //
             //    User user = await db.Users.FirstOrDefaultAsync(u => u.NickName == model.NickName);
             //    if (user == null)
             //    {
             //        // добавляем пользователя в бд
-                    
+
             //        //db.Users.Add(new User { NickName = model.NickName, Password = model.Password });
             //        //await db.SaveChangesAsync();
 
@@ -88,7 +95,7 @@ namespace Skype.Controllers
             //    else
             //        ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             //}
-           // return View(model);
+
         }
 
 
