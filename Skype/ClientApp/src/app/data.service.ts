@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './User';
 import { Injectable } from '@angular/core';
 
@@ -6,18 +6,33 @@ import { Injectable } from '@angular/core';
 export class DataService {
 
   private url = "/api/products";
+  
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer " + localStorage.getItem("token")
+  });
+
+  //User userModel;
 
   constructor(private http: HttpClient) {
 
   }
+
+  
   getUser() {
     return this.http.get(this.url);
   }
-  postUserLogin(user: User) {
+  post(url: string, body: any) {
+    
+    //const body = { nickName: user.nickName, password: user.password };
 
-    const body = { nickName: user.nickName, password: user.password };
-    return this.http.post('https://localhost:5001/api/Account/Login', body);
+    if (!localStorage.getItem("token")) {
+      return this.http.post('https://localhost:5001/api/' + url, body);
+    }
+
+    return this.http.post('https://localhost:5001/api/' + url, body, { headers: this.headers });
   }
+
   postUserJoin(user: User) {
 
     const body = { nickName: user.nickName, password: user.password };

@@ -10,9 +10,9 @@ namespace Skype.Authorization
     public class AuthOptions
     {
         public const string ISSUER = "MyAuthServer";
-        public const string AUDIENCE = "http://localhost:51884/";
-        const string KEY = "secretkey!123";   
-        public const int LIFETIME = 2; 
+        public const string AUDIENCE = "http://localhost:5001/";
+        const string KEY = "this is my custom Secret key for authnetication";   
+        public const int LIFETIME = 10; 
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {
             return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));

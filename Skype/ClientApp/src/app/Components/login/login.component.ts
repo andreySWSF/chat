@@ -3,6 +3,7 @@ import { DataService } from '../../data.service';
 import { User } from '../../User';
 import { Routes, Router } from '@angular/router';
 import { SkypeWindowComponent } from '../skype-window/skype-window.component';
+import { HttpHeaders } from '@angular/common/http';
 
 //class User
 //{ 
@@ -31,16 +32,18 @@ import { SkypeWindowComponent } from '../skype-window/skype-window.component';
 
 export class LoginComponent { 
   
-  
+  tokenKey = "accessToken";
   isValid: boolean = false;
   reportMessage: string = "";
-  receivedUser: User; 
+  //receivedUser: User; 
   done: boolean = false;
+
   
   constructor(private dataService: DataService, private router: Router) {
   }
   
   skype: SkypeWindowComponent = new SkypeWindowComponent(this.dataService);
+ 
 
   goToItem(skype: SkypeWindowComponent) {
 
@@ -48,16 +51,21 @@ export class LoginComponent {
       ['/skype-window']
     );
   }
+
+ 
   loginUser(name: string, pass: string) {
     
     var nick = name;
     var password = pass;
     var user: User = new User(nick, password);
    
-    this.dataService.postUserLogin(user).subscribe((data: boolean) => {
-      this.isValid = data;
+    this.dataService.post("Account/LoginByToken", user).subscribe((obj) => {
+      this.isValid = (obj!=null)?true:false;
+      localStorage.setItem('token', JSON.stringify(obj.access_token));
       if (this.isValid) {
+
         this.reportMessage = "User is valid";
+
         this.goToItem(this.skype);
       }
       else { this.reportMessage = "User not found, register please"; }
@@ -78,7 +86,7 @@ export class LoginComponent {
     else {
       var userOnRegistration: User = new User(nick, password);
 
-      this.dataService.postUserJoin(userOnRegistration).subscribe((data: boolean) => {
+      this.dataService.post('Account/Register', userOnRegistration).subscribe((data: boolean) => {
         this.isValid = data;
         if (this.isValid) {
           this.reportMessage = "User allready exist";

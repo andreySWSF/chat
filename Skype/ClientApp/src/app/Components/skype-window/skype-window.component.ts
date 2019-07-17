@@ -30,8 +30,14 @@ export class SkypeWindowComponent {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    //var options = {
+    //  //transport: TransportType.WebSockets,
+    //  logging: signalR.LogLevel.Trace,
+    //  accessToken: 
+    //};
+
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/chat')
+      .withUrl('https://localhost:5001/chat/', { accessTokenFactory: () => localStorage.getItem("token") })// + '?token=' + localStorage.getItem("token"))
       .build();
 
     this.hubConnection

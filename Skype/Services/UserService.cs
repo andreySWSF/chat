@@ -28,7 +28,10 @@ namespace Skype.Services
             
         //    return true;
         //}
-         
+         public User GetUser(string name)
+        {
+           return _repository.GetByName(name);
+        }
         public bool IsUserExist(UserVM user)
         {
             return _repository.IsUserExist(user.NickName);           

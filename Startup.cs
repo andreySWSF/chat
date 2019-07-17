@@ -49,8 +49,6 @@ namespace Skype
             services.AddSingleton(mapper);
             //services.AddMvc();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<SkypeContext>()
                 .AddDefaultTokenProviders();
@@ -63,11 +61,11 @@ namespace Skype
             
 
             // auth by cookie
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options => //CookieAuthenticationOptions
-                {
-                    options.LoginPath = new PathString("/Login");
-                });
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(options => //CookieAuthenticationOptions
+            //    {
+            //        options.LoginPath = new PathString("/Login");
+            //    });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -123,15 +121,15 @@ namespace Skype
                 app.UseHsts();
             }
 
-            app.UseDefaultFiles();
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseDefaultFiles();
+            app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseSession();
+
             app.UseSpaStaticFiles();
             app.UseCors("CorsPolicy");
-
-            app.UseAuthentication();
-
-           
 
             app.UseMvc(routes =>
             {
