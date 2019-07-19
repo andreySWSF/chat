@@ -33,11 +33,11 @@ export class DataService {
     return this.http.post('https://localhost:5001/api/' + url, body, { headers: this.headers });
   }
 
-  postUserJoin(user: User) {
+  //postUserJoin(user: User) {
 
-    const body = { nickName: user.nickName, password: user.password };
-    return this.http.post('https://localhost:5001/api/Account/Register', body);
-  }
+  //  const body = { nickName: user.nickName, password: user.password };
+  //  return this.http.post('https://localhost:5001/api/Account/Register', body);
+  //}
   //createUser(user: User) {
   //  return this.http.post(this.url, user);
   //}

@@ -36,8 +36,15 @@ export class SkypeWindowComponent {
     //  accessToken: 
     //};
 
+    //this.hubConnection = new signalR.HubConnectionBuilder()
+    //  .withUrl('https://localhost:5001/chat/', {
+    //    skipNegotiation: true,
+    //    accessTokenFactory: () => localStorage.getItem("token")
+    //  })// + '?token=' + localStorage.getItem("token"))
+    //  .build();
+
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/chat/', { accessTokenFactory: () => localStorage.getItem("token") })// + '?token=' + localStorage.getItem("token"))
+      .withUrl('https://localhost:5001/chat/', { accessTokenFactory: () => localStorage.getItem("token") })
       .build();
 
     this.hubConnection
@@ -45,20 +52,27 @@ export class SkypeWindowComponent {
       .then(() => console.log('Connection started!'))
       .catch(err => console.log('Error while establishing connection :('));
 
-    this.hubConnection.on("Send", data => {
+    this.hubConnection.on("Send", (data) => {
       this.recivedText = data;
       this.messages.push(this.recivedText);
-    });
+    }, );
   }
+  getContactsFromDb(name: string, pass: string) {
 
+    var user: User = new User(name, pass);
+
+    this.dataService.post("Account/GetUsers", user).subscribe((userList) => {
+      
+    });
+
+  }
   public sendMessage(): void {
     this.hubConnection
-      .invoke('Send', this.message).then(res => {
+      .invoke('Send', this.message, 'user').then(res => {
         console.log(res);
       })
       .catch(err => console.error(err));
   }
-
  
 
   reportHandler() {

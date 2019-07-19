@@ -147,9 +147,6 @@ namespace Skype.Controllers
                     expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
                     var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt); 
-
-           
-
             var response = new
             {
                 access_token = encodedJwt,
@@ -181,18 +178,24 @@ namespace Skype.Controllers
             return null;
         }
 
-        private async Task Authenticate(string userName)
-        {
-            // создаем один claim
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
-            };
-            // создаем объект ClaimsIdentity
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
-            // установка аутентификационных куки
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
-        }
+        //[EnableCors("AllowAllOrigin")]
+        //[Route("Register")]
+        //public IActionResult GetUsers()
+        //{
+        //    return _userService.
+        //}
+        //private async Task Authenticate(string userName)
+        //{
+        //    // создаем один claim
+        //    var claims = new List<Claim>
+        //    {
+        //        new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+        //    };
+        //    // создаем объект ClaimsIdentity
+        //    ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+        //    // установка аутентификационных куки
+        //    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        //}
 
         public async Task<IActionResult> Logout()
         {

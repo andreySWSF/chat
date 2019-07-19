@@ -28,7 +28,10 @@ namespace Skype.ServiceModels
             var user = GetByName(name);
             return (user != null) ? true : false;
         }
-
+        //public List<User> GetUsers()
+        //{
+        //    return _table;
+        //}
         public User GetByName(string name)
         {
             User user = _table.SingleOrDefault(el => el.NickName == name);
