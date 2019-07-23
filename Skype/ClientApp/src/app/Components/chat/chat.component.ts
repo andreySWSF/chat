@@ -5,25 +5,23 @@ import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
 import { User } from '../../User';
 
-
 @Component({
-  selector: 'skype-window',
-  templateUrl: './skype-window.component.html',
-  styleUrls: ['./skype-window.component.css'],
+  selector: 'chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.css'],
   providers: [DataService]
 })
 
-export class SkypeWindowComponent {
+export class Chat {
 
   hello: string = "";
-  
+
   receivedUser: User; // полученный пользователь
   done: boolean = false;
   private hubConnection: HubConnection;
   nick = '';
   message = '';
   recivedText = "";
-  token = localStorage.getItem("token");
 
   messages: string[] = [];
   data: any;
@@ -53,28 +51,28 @@ export class SkypeWindowComponent {
       .then(() => console.log('Connection started!'))
       .catch(err => console.log('Error while establishing connection :('));
 
-    this.hubConnection.on("Test", (data) => {
+    this.hubConnection.on("Send", (data) => {
       this.recivedText = data;
       this.messages.push(this.recivedText);
-    }, );
+    });
   }
   getContactsFromDb(name: string, pass: string) {
 
     var user: User = new User(name, pass);
 
     this.dataService.post("Account/GetUsers", user).subscribe((userList) => {
-      
+
     });
 
   }
   public sendMessage(): void {
     this.hubConnection
-      .invoke('Send', this.message, 'user' ).then(res => {
+      .invoke('Send', this.message, 'user').then(res => {
         console.log(res);
       })
       .catch(err => console.error(err));
   }
- 
+
 
   reportHandler() {
 
@@ -82,29 +80,3 @@ export class SkypeWindowComponent {
 
 
 }
-
-    //this.hubConnection.on('Send', (nick: string, receivedMessage: string) => {
-    //  const text = `${nick}: ${receivedMessage}`;
-    //  this.messages.push(text);
-    //});
-
-
-  //getValueFromInput(id) {
-  //  var value;
-  //}
-  //ngOnInit() {
-  //}
-
- //checkUser(name: string, pass: string) {
-
-  //  var nick = name;
-  //  var password = pass;
-  //  var user: User = new User(nick, password);
-
-  //  this.dataService.postData(user).subscribe((data: boolean) => {
-  //    this.hello = "dfdf";
-
-  //  });
-
-  //}
-

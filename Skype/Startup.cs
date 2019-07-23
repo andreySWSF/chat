@@ -71,7 +71,6 @@ namespace Skype
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddSignalR();
             //services.AddSignalR().AddHubOptions<ChatHub>(options =>
             //{
             //    options.EnableDetailedErrors = true;
@@ -154,6 +153,8 @@ namespace Skype
                  };
              });
 
+            services.AddSignalR();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -191,6 +192,8 @@ namespace Skype
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseCors("AllowAllOrigin");
+
+            app.UseMiddleware<Middleware.WebSocketsMiddleware>();
 
             app.UseAuthentication();
 

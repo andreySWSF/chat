@@ -28,25 +28,7 @@ export class AppComponent {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    //this.nick = window.prompt('Your name:', 'John');
-
-    //this.hubConnection = new signalR.HubConnectionBuilder()
-    //  .withUrl('https://localhost:5001/chat')
-    //  .build();
-
-    //this.hubConnection
-    //  .start()
-    //  .then(() => console.log('Connection started!'))
-    //  .catch(err => console.log('Error while establishing connection :('));
-
-    //this.hubConnection.on('Send', (nick: string, receivedMessage: string) => {
-    //  const text = `${nick}: ${receivedMessage}`;
-    //  this.messages.push(text);
-    //});
-    //this.hubConnection.on("Send", data => {
-    //  this.recivedText = data;
-    //  this.messages.push(this.recivedText);
-   // });
+    
   }
   
   //public sendMessage(): void {

@@ -15,6 +15,7 @@ import { FetchDataComponent } from './Components/fetch-data/fetch-data.component
 import { LoginComponent } from './Components/login/login.component';
 import { SkypeWindowComponent } from './Components/skype-window/skype-window.component';
 import { SkypeWindowGuard } from './Components/skype-window.guard';
+//import { Chat } from './Components/chat/chat.component';
 
 //const appRoutes: Routes = [
 //  { path: '', component: HomeComponent },
@@ -34,6 +35,7 @@ import { SkypeWindowGuard } from './Components/skype-window.guard';
     FetchDataComponent,
     LoginComponent,
     SkypeWindowComponent
+    //Chat
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import { SkypeWindowGuard } from './Components/skype-window.guard';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'skype-window', component: SkypeWindowComponent, canActivate: [SkypeWindowGuard] }
+      //{ path: 'chat', component: Chat }
     ])
   ],
   providers: [SkypeWindowGuard],
