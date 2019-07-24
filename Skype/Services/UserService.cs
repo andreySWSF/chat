@@ -28,6 +28,13 @@ namespace Skype.Services
             
         //    return true;
         //}
+        public void SetFiendUser(string userFromId, string userToId)
+        {
+            _repository.SetUserConnection(userFromId, userToId);
+            
+        }
+        
+        
          public User GetUser(string name)
         {
            return _repository.GetByName(name);

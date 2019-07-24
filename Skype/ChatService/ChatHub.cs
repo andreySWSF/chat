@@ -48,7 +48,7 @@ namespace Skype.ChatService
                 if (name != to) // если получатель и текущий пользователь не совпадают
                     await Clients.User(Context.UserIdentifier).SendAsync("Receive", message, name);
                 await Clients.User(to).SendAsync("Receive", message, name);
-                await Clients.All.SendAsync("Test", message, name);
+                await Clients.All.SendAsync("Send", message, name);
             }
             
 

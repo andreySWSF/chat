@@ -33,6 +33,10 @@ export class DataService {
     return this.http.post('https://localhost:5001/api/' + url, body, { headers: this.headers });
   }
 
+  checkPost(search: string) {
+    return this.http.post('https://localhost:5001/api/User/SearchUser', search);
+  }
+
   //postUserJoin(user: User) {
 
   //  const body = { nickName: user.nickName, password: user.password };

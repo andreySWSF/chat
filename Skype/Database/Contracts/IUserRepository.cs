@@ -11,5 +11,7 @@ namespace Skype.Database
 
         bool IsUserExist(string name);
         User GetByName(string name);
+        User GetById(string id);
+        void SetUserConnection(string userIdFrom, string userIdTo);
     }
 }

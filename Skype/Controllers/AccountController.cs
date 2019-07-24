@@ -184,6 +184,8 @@ namespace Skype.Controllers
         //{
         //    return _userService.
         //}
+
+
         //private async Task Authenticate(string userName)
         //{
         //    // создаем один claim

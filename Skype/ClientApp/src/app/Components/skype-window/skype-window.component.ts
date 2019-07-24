@@ -22,6 +22,7 @@ export class SkypeWindowComponent {
   private hubConnection: HubConnection;
   nick = '';
   message = '';
+  search = '';
   recivedText = "";
   token = localStorage.getItem("token");
 
@@ -53,11 +54,19 @@ export class SkypeWindowComponent {
       .then(() => console.log('Connection started!'))
       .catch(err => console.log('Error while establishing connection :('));
 
-    this.hubConnection.on("Test", (data) => {
+    this.hubConnection.on("Send", (data) => {
       this.recivedText = data;
       this.messages.push(this.recivedText);
-    }, );
+    });
+
+    this.hubConnection.on("Receive", (data, user) => {
+      
+      this.recivedText = data;
+      //this.messages.push(this.recivedText);
+    });
   }
+
+
   getContactsFromDb(name: string, pass: string) {
 
     var user: User = new User(name, pass);
@@ -66,6 +75,12 @@ export class SkypeWindowComponent {
       
     });
 
+  }
+
+  tryToSearch() {
+    this.dataService.checkPost(this.search).subscribe((reqUser) => {
+
+    });
   }
   public sendMessage(): void {
     this.hubConnection

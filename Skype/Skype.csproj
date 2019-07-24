@@ -24,15 +24,8 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove="ClientApp\src\app\Components\chat\**" />
     <Content Remove="$(SpaRoot)**" />
-    <Content Remove="ClientApp\src\app\Components\chat\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="ClientApp\src\app\Components\chat\**" />
-    <None Remove="ClientApp\src\app\Components\chat\**" />
   </ItemGroup>
 
   <ItemGroup>

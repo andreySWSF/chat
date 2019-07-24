@@ -23,6 +23,16 @@ namespace Skype.ServiceModels
             //  _mapper = mapper;
             //this.GetAll<Chat>();
         }
+
+        public void SetUserConnection(string userIdFrom, string userIdTo)
+        {
+            User userFrom = _table.SingleOrDefault(u => u.Id == userIdFrom);
+            UserConnection uConnect = new UserConnection() { UserFromId = userIdFrom, UserToId = userIdTo };
+            userFrom.FromUserToUser.Add(uConnect);
+
+
+        }
+
         public bool IsUserExist(string name)
         {
             var user = GetByName(name);
@@ -38,6 +48,12 @@ namespace Skype.ServiceModels
              return user;             
         }
 
-       
+        public User GetById(string id)
+        {
+            User user = _table.SingleOrDefault(el => el.Id == id);
+            return user;
+        }
+
+
     }
 }
