@@ -22,6 +22,7 @@ namespace Skype.Models
 
         public User()
         {
+            UserName = NickName;
             UserChats = new List<UserChat>();
         }
     }

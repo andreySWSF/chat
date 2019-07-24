@@ -85,7 +85,12 @@ namespace Skype.Controllers
             {
                 _userService.RegisterUser(model);
                 User user = _userService.MapModels(model);
+                user.UserName = user.NickName;
+                var result = await _userManager.CreateAsync(user, model.Password);
+                
                 await _signInManager.SignInAsync(user, false);
+                
+               
                 return Json(false);
             }         
 
