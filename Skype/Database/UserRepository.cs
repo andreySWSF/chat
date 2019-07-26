@@ -29,8 +29,6 @@ namespace Skype.ServiceModels
             User userFrom = _table.SingleOrDefault(u => u.Id == userIdFrom);
             UserConnection uConnect = new UserConnection() { UserFromId = userIdFrom, UserToId = userIdTo };
             userFrom.FromUserToUser.Add(uConnect);
-
-
         }
 
         public bool IsUserExist(string name)
@@ -45,9 +43,14 @@ namespace Skype.ServiceModels
         public User GetByName(string name)
         {
             User user = _table.SingleOrDefault(el => el.NickName == name);
-             return user;             
+             return user;
         }
-
+        public IQueryable<User> GetUserListBySymb(string symbols)
+        {
+            var result = _table.Where(t=>t.NickName.StartsWith(symbols));
+            return result;    
+        }
+        
         public User GetById(string id)
         {
             User user = _table.SingleOrDefault(el => el.Id == id);

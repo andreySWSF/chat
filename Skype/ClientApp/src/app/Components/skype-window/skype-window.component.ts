@@ -4,6 +4,9 @@ import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 //import signalR = require('@aspnet/signalr');
 import * as signalR from '@aspnet/signalr';
 import { User } from '../../User';
+import { Contact } from './Contact';
+import { forEach } from '@angular/router/src/utils/collection';
+import { debug } from 'util';
 
 
 @Component({
@@ -16,13 +19,17 @@ import { User } from '../../User';
 export class SkypeWindowComponent {
 
   hello: string = "";
-  
+ // reqObq: object = { values = '' ;};
   receivedUser: User; // полученный пользователь
+  //contact = { id: "", name: "" }
+  contacts: Contact[] = [];
   done: boolean = false;
   private hubConnection: HubConnection;
   nick = '';
   message = '';
-  search = '';
+  info = '';
+  contact: Contact;
+  searchResult: any[] = [];
   recivedText = "";
   token = localStorage.getItem("token");
 
@@ -51,10 +58,13 @@ export class SkypeWindowComponent {
 
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started!'))
+      .then(() => {
+        console.log('Connection started!');
+      })
       .catch(err => console.log('Error while establishing connection :('));
 
     this.hubConnection.on("Send", (data) => {
+      debugger;
       this.recivedText = data;
       this.messages.push(this.recivedText);
     });
@@ -67,20 +77,35 @@ export class SkypeWindowComponent {
   }
 
 
-  getContactsFromDb(name: string, pass: string) {
+  //getContactsFromDb(name: string, pass: string) {
 
-    var user: User = new User(name, pass);
+  //  var user: User = new User(name, pass);
 
-    this.dataService.post("Account/GetUsers", user).subscribe((userList) => {
+  //  this.dataService.post("Account/GetUsers", user).subscribe((userList) => {
       
-    });
+  //  });
 
+  //}
+
+  tryToSearch( query: string ) {
+
+    if (query.length >= 3) {
+      this.dataService.checkPost(query).subscribe((reqUsers: Contact[]) => {
+        
+        if (!reqUsers) { this.message = "Sorry, can't find user" }
+        this.contacts = reqUsers;
+      
+      }); 
+    }
+   
   }
+  public addToFriendList(userAddId: string) {
 
-  tryToSearch() {
-    this.dataService.checkPost(this.search).subscribe((reqUser) => {
+    this.dataService.addFriendPost(userAddId).subscribe((request) => {
 
-    });
+
+    }); 
+
   }
   public sendMessage(): void {
     this.hubConnection

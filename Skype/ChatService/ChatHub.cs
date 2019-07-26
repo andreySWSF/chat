@@ -21,7 +21,7 @@ namespace Skype.ChatService
         SignInManager<User> _signInManager;
        // User testUser = new User() { NickName = "dddd", Password = "000" };
         IHttpContextAccessor _httpContextAccessor;
-        public ChatHub(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IHttpContextAccessor httpContextAccessor)
+        public ChatHub(IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _signInManager = signInManager;
             _mapper = mapper;
@@ -31,8 +31,8 @@ namespace Skype.ChatService
         {
             var handler = new JwtSecurityTokenHandler();
             string token = Context.GetHttpContext().Request.Query["access_token"];
-            var res = token.GetType();            
-
+            var res = token.GetType();
+            to = "AndreyN";
             if (token == null)
             {
                 throw new Exception();
@@ -43,39 +43,17 @@ namespace Skype.ChatService
                 var tokenS = handler.ReadToken(token) as JwtSecurityToken;
                 var claims = tokenS.Claims;
                 var name = tokenS.Claims.First(claim => claim.Type == ClaimsIdentity.DefaultNameClaimType).Value;
-                
-                
+               // var connectionId = Context.Co;
+
                 if (name != to) // если получатель и текущий пользователь не совпадают
-                    await Clients.User(Context.UserIdentifier).SendAsync("Receive", message, name);
-                await Clients.User(to).SendAsync("Receive", message, name);
-                await Clients.All.SendAsync("Send", message, name);
+                   // await Clients.User(Context.UserIdentifier).SendAsync("Receive", message, name);
+                await Clients.User(to).SendAsync("Send", message, name);
+                //await Clients.All.SendAsync("Send", message, name);
             }
-            
-
-            
-          //  var jti = tokenS.Claims.First(claim => claim.Type == "jti").Value;
-
-
-
-
-            //var t = _userManager.Users;
-
-            //var r = _signInManager;
-
-            //var chatVM = new Models.VModels.ChatVM
-            //{
-            //    ChatName = "test"
-            //};
-            //var model = _mapper.Map<Models.Chat>(chatVM);
-
             
             
         }
 
-        //public override async Task OnConnectedAsync()
-        //{
-        //    await Clients.All.SendAsync("Notify", $"Hi {Context.UserIdentifier}");
-        //    await base.OnConnectedAsync();
-        //}
+        
     }
 }

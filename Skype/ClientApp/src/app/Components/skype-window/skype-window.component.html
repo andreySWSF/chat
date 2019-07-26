@@ -23,14 +23,26 @@
 
   <div id="contacts">
     <div class="container">
+      <!------------------------------------------search------------------------------------------->
+      <!--<input type="text" placeholder="Search" ng-model="search" ng-focus="focus=true">
+      <div id="search-results" ng-show="focus">
+        <div class="search-result" ng-repeat="item in data | search:search" ng-bind="item" ng-click="setQuery(item)"></div>
+      </div>-->
       <div class="card-header">
-        <div class="input-group">
-          <input type="text" placeholder="Search..." name="" [(ngModel)]="search" (change)="onChange()" class="form-control search">
+        <div class="input-group" >
+          <input type="text" placeholder="Search..." name="" #search>
+          <button (click)="tryToSearch(search.value)">Search</button>
           <div class="input-group-prepend">
             <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
           </div>
         </div>
       </div>
+      <div class="container" *ngIf="contacts.length > 0">
+        <div *ngFor="let contact of contacts">
+          <div (click) ="addToFriendList(contact.id)" style="border:1px solid #dedede">{{contact.nickName}}</div>
+        </div>
+      </div>
+      <!------------------------------------------search------------------------------------------->
       <div class="container"><h2>_______________________________________</h2></div>
       <div id="exTab3" class="container">
         <ul class="nav nav-pills">

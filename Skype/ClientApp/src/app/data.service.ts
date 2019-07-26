@@ -32,24 +32,15 @@ export class DataService {
 
     return this.http.post('https://localhost:5001/api/' + url, body, { headers: this.headers });
   }
-
+ 
   checkPost(search: string) {
-    return this.http.post('https://localhost:5001/api/User/SearchUser', search);
+    var body = { query: search };
+    return this.http.post('https://localhost:5001/api/User/SearchUser', body);
   }
 
-  //postUserJoin(user: User) {
+  addFriendPost(userAddId: string) {
+    var body = { query: userAddId };
+    return this.http.post('https://localhost:5001/api/User/SearchUser', body);
+  }
 
-  //  const body = { nickName: user.nickName, password: user.password };
-  //  return this.http.post('https://localhost:5001/api/Account/Register', body);
-  //}
-  //createUser(user: User) {
-  //  return this.http.post(this.url, user);
-  //}
-  //updateProduct(user: User) {
-
-  //  return this.http.put(this.url + '/' + user.id, user);
-  //}
-  //deleteUser(id: number) {
-  //  return this.http.delete(this.url + '/' + id);
-  //}
 }

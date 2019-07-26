@@ -25,9 +25,16 @@ namespace Skype.Services
         //public bool CheckUser(UserVM user)
         //{
         //    User checkUser = _repository.GetByName(user.NickName);
-            
+
         //    return true;
         //}
+
+        public IQueryable<User> GetMatchedUsers(string symb)
+        {
+            return _repository.GetUserListBySymb(symb);
+
+        }
+        
         public void SetFiendUser(string userFromId, string userToId)
         {
             _repository.SetUserConnection(userFromId, userToId);

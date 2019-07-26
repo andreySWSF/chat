@@ -8,8 +8,8 @@ namespace Skype.Database
 {
     public interface IUserRepository : IRepository<User>
     {
-
-        bool IsUserExist(string name);
+        IQueryable<User>GetUserListBySymb(string symbols);
+        bool IsUserExist(string name);       
         User GetByName(string name);
         User GetById(string id);
         void SetUserConnection(string userIdFrom, string userIdTo);

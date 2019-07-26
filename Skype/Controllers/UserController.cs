@@ -31,14 +31,40 @@ namespace Skype.Controllers
             return Ok($"Ваш логин: {User.Identity.Name}");
         }
 
-        public IActionResult SearchUser([FromBody] string name)
+        [EnableCors("AllowAllOrigin")]
+        [Route("SearchUser")]
+        [HttpPost]
+        public IActionResult SearchUser([FromBody] Search body)
         {
-           User user = _userService.GetUser(name);
-            return Json("0");
+           
+            List<User> usersToResponce = new List<User>();
+            IQueryable<User> users = _userService.GetMatchedUsers(body.query);
+           
+            foreach(var u in users)
+            {
+                User buffUser = new User() { Id = u.Id, NickName = u.NickName };
+                usersToResponce.Add(buffUser);
+            }
+
+            return Json(usersToResponce);
 
         }
 
-        
+        [EnableCors("AllowAllOrigin")]
+        [Route("SearchUser")]
+        [HttpPost]
+        public IActionResult SendInviteToUser([FromBody] Models.DBModels.BaseModel body)
+        {
+
+            
+
+            return Json("");
+
+        }
+
+
 
     }
+
 }
+

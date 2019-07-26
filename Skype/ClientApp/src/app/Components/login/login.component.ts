@@ -68,7 +68,6 @@ export class LoginComponent {
       }
       else { this.reportMessage = "User not found, register please"; }
     });   
-    
   }
 
   registerUser(name: string, pass: string, repeatPass: string) {
