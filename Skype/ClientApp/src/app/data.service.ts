@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './User';
 import { Injectable } from '@angular/core';
 
@@ -6,27 +6,41 @@ import { Injectable } from '@angular/core';
 export class DataService {
 
   private url = "/api/products";
+  
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': "Bearer " + localStorage.getItem("token")
+  });
+
+  //User userModel;
 
   constructor(private http: HttpClient) {
 
   }
- 
+
+  
   getUser() {
     return this.http.get(this.url);
   }
-  postData(user: User) {
+  post(url: string, body: any) {
+    
+    //const body = { nickName: user.nickName, password: user.password };
 
-    const body = { nickName: user.nickName, password: user.password };
-    return this.http.post('https://localhost:5001/api/Home/', body);
-  }
-  createUser(user: User) {
-    return this.http.post(this.url, user);
-  }
-  //updateProduct(user: User) {
+    if (!localStorage.getItem("token")) {
+      return this.http.post('https://localhost:5001/api/' + url, body);
+    }
 
-  //  return this.http.put(this.url + '/' + user.id, user);
-  //}
-  //deleteUser(id: number) {
-  //  return this.http.delete(this.url + '/' + id);
-  //}
+    return this.http.post('https://localhost:5001/api/' + url, body, { headers: this.headers });
+  }
+ 
+  checkPost(search: string) {
+    var body = { query: search };
+    return this.http.post('https://localhost:5001/api/User/SearchUser', body);
+  }
+
+  addFriendPost(userAddId: string) {
+    var body = { query: userAddId };
+    return this.http.post('https://localhost:5001/api/User/SearchUser', body);
+  }
+
 }

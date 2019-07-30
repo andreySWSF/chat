@@ -2,45 +2,69 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Skype.Models;
+using Skype.ServiceModels;
+using Skype.Services;
+using Skype.Services.Contracts;
 
 namespace Skype.Controllers
 {
+    // [ApiController]
     [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : Controller
     {
-        // GET: api/User
-        [HttpGet]
-        public IEnumerable<string> Get()
+        UserService _userService;
+
+        public UserController(UserService userService)
         {
-            return new string[] { "value1", "value2" };
+            _userService = userService;
+        }
+        [Authorize]
+        [Route("getlogin")]
+        public IActionResult GetLogin()
+        {
+            return Ok($"Ваш логин: {User.Identity.Name}");
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/User
+        [EnableCors("AllowAllOrigin")]
+        [Route("SearchUser")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult SearchUser([FromBody] Search body)
         {
+           
+            List<User> usersToResponce = new List<User>();
+            IQueryable<User> users = _userService.GetMatchedUsers(body.query);
+           
+            foreach(var u in users)
+            {
+                User buffUser = new User() { Id = u.Id, NickName = u.NickName };
+                usersToResponce.Add(buffUser);
+            }
+
+            return Json(usersToResponce);
+
         }
 
-        // PUT: api/User/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [EnableCors("AllowAllOrigin")]
+        [Route("SearchUser")]
+        [HttpPost]
+        public IActionResult SendInviteToUser([FromBody] Models.DBModels.BaseModel body)
         {
+
+            
+
+            return Json("");
+
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+
+
     }
+
 }
+

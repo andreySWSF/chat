@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ModalModule } from 'ngx-bootstrap/modal';
+//import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+//import { TooltipModule } from 'ngx-bootstrap/tooltip';
+//import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './Components/nav-menu/nav-menu.component';
@@ -15,6 +15,7 @@ import { FetchDataComponent } from './Components/fetch-data/fetch-data.component
 import { LoginComponent } from './Components/login/login.component';
 import { SkypeWindowComponent } from './Components/skype-window/skype-window.component';
 import { SkypeWindowGuard } from './Components/skype-window.guard';
+//import { Chat } from './Components/chat/chat.component';
 
 //const appRoutes: Routes = [
 //  { path: '', component: HomeComponent },
@@ -34,26 +35,27 @@ import { SkypeWindowGuard } from './Components/skype-window.guard';
     FetchDataComponent,
     LoginComponent,
     SkypeWindowComponent
+    //Chat
   ],
   imports: [
     BrowserModule,
-    BsDropdownModule.forRoot(),
-    TooltipModule.forRoot(),
-    ModalModule.forRoot(),
+    //BsDropdownModule.forRoot(),
+    //TooltipModule.forRoot(),
+    //ModalModule.forRoot(),
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: LoginComponent},
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'skype-window', component: SkypeWindowComponent, canActivate: [SkypeWindowGuard] },
-      { path: 'login', component: LoginComponent }
+      { path: 'skype-window', component: SkypeWindowComponent, canActivate: [SkypeWindowGuard] }
+      //{ path: 'chat', component: Chat }
     ])
   ],
   providers: [SkypeWindowGuard],
   bootstrap: [AppComponent],
-  exports: [BsDropdownModule, TooltipModule, ModalModule]
+  //exports: [BsDropdownModule, TooltipModule, ModalModule]
 })
 export class AppModule { }
 //export class AppBootstrapModule { }

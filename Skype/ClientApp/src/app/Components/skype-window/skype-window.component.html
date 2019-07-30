@@ -20,8 +20,29 @@
 </div>
 <div id="global">
   <!------------------------------------------contacts block------------------------------------------->
+
   <div id="contacts">
     <div class="container">
+      <!------------------------------------------search------------------------------------------->
+      <!--<input type="text" placeholder="Search" ng-model="search" ng-focus="focus=true">
+      <div id="search-results" ng-show="focus">
+        <div class="search-result" ng-repeat="item in data | search:search" ng-bind="item" ng-click="setQuery(item)"></div>
+      </div>-->
+      <div class="card-header">
+        <div class="input-group" >
+          <input type="text" placeholder="Search..." name="" #search>
+          <button (click)="tryToSearch(search.value)">Search</button>
+          <div class="input-group-prepend">
+            <span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="container" *ngIf="contacts.length > 0">
+        <div *ngFor="let contact of contacts">
+          <div (click) ="addToFriendList(contact.id)" style="border:1px solid #dedede">{{contact.nickName}}</div>
+        </div>
+      </div>
+      <!------------------------------------------search------------------------------------------->
       <div class="container"><h2>_______________________________________</h2></div>
       <div id="exTab3" class="container">
         <ul class="nav nav-pills">
@@ -30,16 +51,27 @@
           </li>
           <li>
             <a href="#2b" data-toggle="tab">Chats</a>
-          </li>          
+          </li>
         </ul>
 
         <div class="tab-content clearfix">
           <div class="tab-pane active" id="1b">
+<<<<<<< HEAD
             <h3>COntact1</h3>
           </div>
           <div class="tab-pane" id="2b">
             <h3>Chat1</h3>
           </div>          
+=======
+            <h3>Contact1</h3>
+          </div>
+          <div class="tab-pane active" id="1b">
+            <h3>Contact2</h3>
+          </div>
+          <div class="tab-pane" id="2b">
+            <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
+          </div>
+>>>>>>> master
         </div>
       </div>
 
