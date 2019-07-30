@@ -39,7 +39,7 @@
       </div>
       <div class="container" *ngIf="contacts.length > 0">
         <div *ngFor="let contact of contacts">
-          <div (click) ="addToFriendList(contact.id)" style="border:1px solid #dedede">{{contact.nickName}}</div>
+          <div style="border:1px solid #dedede">{{contact.nickName}}</div>
         </div>
       </div>
       <!------------------------------------------search------------------------------------------->

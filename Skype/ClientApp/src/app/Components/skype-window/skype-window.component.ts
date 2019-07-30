@@ -39,18 +39,7 @@ export class SkypeWindowComponent {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    //var options = {
-    //  //transport: TransportType.WebSockets,
-    //  logging: signalR.LogLevel.Trace,
-    //  accessToken: 
-    //};
-
-    //this.hubConnection = new signalR.HubConnectionBuilder()
-    //  .withUrl('https://localhost:5001/chat/', {
-    //    skipNegotiation: true,
-    //    accessTokenFactory: () => localStorage.getItem("token")
-    //  })// + '?token=' + localStorage.getItem("token"))
-    //  .build();
+   
 
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('https://localhost:5001/chat/', { accessTokenFactory: () => localStorage.getItem("token") })
@@ -63,17 +52,17 @@ export class SkypeWindowComponent {
       })
       .catch(err => console.log('Error while establishing connection :('));
 
-    this.hubConnection.on("Send", (data) => {
-      debugger;
+    this.hubConnection.on("Receive", (data) => {
+      //debugger;
       this.recivedText = data;
       this.messages.push(this.recivedText);
     });
 
-    this.hubConnection.on("Receive", (data, user) => {
+    //this.hubConnection.on("Receive", (data, user) => {
       
-      this.recivedText = data;
-      //this.messages.push(this.recivedText);
-    });
+    //  this.recivedText = data;
+    //  //this.messages.push(this.recivedText);
+    //});
   }
 
 
