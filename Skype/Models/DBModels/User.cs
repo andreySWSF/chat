@@ -13,6 +13,7 @@ namespace Skype.Models
         public override string Id { get; set; }
         public string NickName { get; set; }
         public List<Message> Messages { get; set; }
+        //public string ConnectionId { get; set; }
         public List<Chat> Chats { get; set; }
         public List<UserConnection> FromUserToUser { get; set; }
         // public int ChatId { get; set; }

@@ -7,6 +7,7 @@ import { User } from '../../User';
 import { Contact } from './Contact';
 import { forEach } from '@angular/router/src/utils/collection';
 import { debug } from 'util';
+import { Connection } from './Connection';
 
 
 @Component({
@@ -22,8 +23,10 @@ export class SkypeWindowComponent {
  // reqObq: object = { values = '' ;};
   receivedUser: User; // полученный пользователь
   //contact = { id: "", name: "" }
+  connections: Connection[] = [];
   contacts: Contact[] = [];
   done: boolean = false;
+  isFriend: boolean = false;
   private hubConnection: HubConnection;
   nick = '';
   message = '';
@@ -63,19 +66,28 @@ export class SkypeWindowComponent {
       })
       .catch(err => console.log('Error while establishing connection :('));
 
-    this.hubConnection.on("Send", (data) => {
-      debugger;
+    //this.hubConnection.on("OnConnectedAsync", (data) => {
+      
+    //});
+
+    this.hubConnection.on("SendChatMessage", (data) => {
+      //debugger;
       this.recivedText = data;
       this.messages.push(this.recivedText);
     });
 
-    this.hubConnection.on("Receive", (data, user) => {
-      
+    this.hubConnection.on("SendFriendRequest", (data) => {
       this.recivedText = data;
-      //this.messages.push(this.recivedText);
+      this.messages.push(this.recivedText);
     });
   }
-
+  sendRequest(userAddName): string{
+    this.hubConnection
+      .invoke('SendFriendRequest', userAddName).then(res => {
+        console.log(res);
+      })
+      .catch(err => console.error(err));
+  }
 
   //getContactsFromDb(name: string, pass: string) {
 
@@ -87,6 +99,14 @@ export class SkypeWindowComponent {
 
   //}
 
+  public sendMessage(): void {
+    this.hubConnection
+      .invoke('SendChatMessage', this.message, 'user').then(res => {
+        console.log(res);
+      })
+      .catch(err => console.error(err));
+  }
+
   tryToSearch( query: string ) {
 
     if (query.length >= 3) {
@@ -97,23 +117,18 @@ export class SkypeWindowComponent {
       
       }); 
     }
-   
   }
-  public addToFriendList(userAddId: string) {
 
-    this.dataService.addFriendPost(userAddId).subscribe((request) => {
+ 
+  //public addToFriendList(userAddId: string) {
 
+  //  this.dataService.addFriendPost(userAddId).subscribe((request: boolean) => {
 
-    }); 
+  //    this.isFriend = request;
+  //  }); 
 
-  }
-  public sendMessage(): void {
-    this.hubConnection
-      .invoke('Send', this.message, 'user' ).then(res => {
-        console.log(res);
-      })
-      .catch(err => console.error(err));
-  }
+  //}
+ 
  
 
   reportHandler() {

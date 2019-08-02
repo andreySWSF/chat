@@ -59,7 +59,7 @@ export class LoginComponent {
    
     this.dataService.post("Account/LoginByToken", user).subscribe((obj) => {
       this.isValid = (obj!=null)?true:false;
-      localStorage.setItem('token', obj.access_token);
+      localStorage.setItem('token', obj['access_token']);
       if (this.isValid) {
 
         this.reportMessage = "User is valid";

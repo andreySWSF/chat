@@ -38,9 +38,9 @@ export class DataService {
     return this.http.post('https://localhost:5001/api/User/SearchUser', body);
   }
 
-  addFriendPost(userAddId: string) {
-    var body = { query: userAddId };
-    return this.http.post('https://localhost:5001/api/User/SearchUser', body);
-  }
+  //addFriendPost(userAddId: string) {
+  //  var body = { query: userAddId };
+  //  return this.http.post('https://localhost:5001/api/User/SendInviteToUser', body);
+  //}
 
 }

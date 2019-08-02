@@ -51,6 +51,7 @@ namespace Skype.ChatService
         {
             lock (_connections)
             {
+
                 HashSet<string> connections;
                 if (!_connections.TryGetValue(key, out connections))
                 {

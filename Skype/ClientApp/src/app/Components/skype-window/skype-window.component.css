@@ -57,17 +57,20 @@ body {
   background: white;
   padding: 10px;
 }
+  .search-result:hover {
+    background: skyblue;
+  }
 
-input {
-  width: 280px;
-  height: 40px;
-  color: #333;
-  font-size: 16px;
-  padding: 5px;
-  border: 1px solid #dedede;
-  border-radius: 3px;
-  box-sizing: border-box;
-}
+  input {
+    width: 280px;
+    height: 40px;
+    color: #333;
+    font-size: 16px;
+    padding: 5px;
+    border: 1px solid #dedede;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
   .search-result:nth-child(even) {
     background: #fafafa;
   }

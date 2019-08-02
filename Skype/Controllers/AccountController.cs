@@ -52,29 +52,10 @@ namespace Skype.Controllers
             if (isValid)
                 return Json(model);
             else return Json(null);
-            //if (ModelState.IsValid)
-            //{
-            //    User user = await db.Users.FirstOrDefaultAsync(u => u.NickName == model.NickName && u.Password == model.Password);
-            //    if (user != null)
-            //    {
-            //        await Authenticate(model.NickName); // аутентификация
-
-            //        return RedirectToAction("Index", "Home");
-            //    }
-            //    ModelState.AddModelError("", "Некорректные логин и(или) пароль");
-            //}
+            
 
         }
-        //[HttpGet]
-        //public IActionResult Register()
-        //{
-        //    return View();
-        //}
-
-        //Watch on GenericRepository
        
-            //if (ModelState.IsValid)
-            // [HttpPost]
 
         [EnableCors("AllowAllOrigin")]
         [Route("Register")]
@@ -90,42 +71,15 @@ namespace Skype.Controllers
                 
                 await _signInManager.SignInAsync(user, false);
                 
-               
                 return Json(false);
             }         
 
             else return Json(isValid);
-            //    User user = await db.Users.FirstOrDefaultAsync(u => u.NickName == model.NickName);
-            //    if (user == null)
-            //    {
-            //        // добавляем пользователя в бд
-
-            //        //db.Users.Add(new User { NickName = model.NickName, Password = model.Password });
-            //        //await db.SaveChangesAsync();
-
-            //        //await Authenticate(model.NickName); // аутентификация
-
-            //        //return RedirectToAction("Index", "Home");
-            //    }
-            //    else
-            //        ModelState.AddModelError("", "Некорректные логин и(или) пароль");
-            //}
+            
 
         }
 
 
-        //[EnableCors("AllowAllOrigin")]
-        //[HttpPost]
-        //[Route("PostUserResult")]
-        //public IActionResult UserValidation([FromBody]User user)
-        //{
-        //   //
-        //    // return new PhysicalFileResult(Path.Combine(env.WebRootPath, "index.html"), "text/html");
-
-        //    //var checkResult = CheckUser(user);
-
-        //    return Json(true);
-        //}
         [EnableCors("AllowAllOrigin")]
         [Route("LoginByToken")]
         [HttpPost]
@@ -159,8 +113,8 @@ namespace Skype.Controllers
             };
              return Json(response);
             // сериализация ответа
-            Response.ContentType = "application/json";
-            await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
+            //Response.ContentType = "application/json";
+            //await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
         }
 
         private ClaimsIdentity GetIdentity(string username)

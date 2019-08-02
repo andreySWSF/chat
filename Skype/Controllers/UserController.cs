@@ -50,17 +50,18 @@ namespace Skype.Controllers
 
         }
 
-        [EnableCors("AllowAllOrigin")]
-        [Route("SearchUser")]
-        [HttpPost]
-        public IActionResult SendInviteToUser([FromBody] Models.DBModels.BaseModel body)
-        {
 
-            
 
-            return Json("");
 
-        }
+        //[EnableCors("AllowAllOrigin")]
+        //[Route("SendInviteToUser")]
+        //[HttpPost]
+        //public IActionResult SendInviteToUser([FromBody] Models.DBModels.BaseModel body)
+        //{
+
+        //    return Json("");
+
+        //}
 
 
 
